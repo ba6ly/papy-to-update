@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papyrus - Your Pathway to Productivity</title>
+    <link rel="stylesheet" href="LandingPageStyle.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo-container">
+                <div class="logo">
+                    <span class="logo-text">papyrus</span>
+                </div>
+            </div>
+            <nav class="desktop-nav">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+                <a href="#resource-management" class="nav-link">Resource</a>
+                <!-- <a href="#timeline" class="nav-link">Timeline</a> -->
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn signup-btn" onclick="NavToAuthOptions()">Sign Up</button>
+                <button class="btn login-btn" onclick= "NavToLoginAuthOptions()">Login</button>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </header>
+
+        <main>
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                       <p class="bold">Papyrus;</p> 
+                        <span class="hero-subtitle"><p class="normal">Your Pathway to Productivity.</p></span>
+                    </h1>
+                    <p class="hero-description">
+                        A comprehensive platform for students and teachers to manage attendance,
+                        resources, and academic performance in one place.
+                    
+                    </p>
+
+                    <button onclick= "NavToHome()" class="btn cta-btn" id="getStartedBtn"><p class="bold">Get Started</p></button>
+                </div>  
+                <div class="hero-image">
+                    <img class="AttendanceIllustration" src="../new-papyrus-fy/illustrations/TrackAttendance.svg" alt="Papyrus dashboard preview">
+                </div>
+            </section>
+
+            <!-- <section class="user-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="students">
+                        For Students
+                    </button>
+                    <button class="tab-btn" data-tab="teachers">
+                        For Teachers
+                    </button>
+                </div>
+            </section> -->
+
+            <section class="features-showcase" id="features">
+                <h2 class="section-title">Key Features</h2>
+                
+                <div class="card-scroll-container">
+                    <button class="scroll-btn scroll-left">
+                        ‹
+                    </button>
+                    
+                    <div class="cards-container">
+                        <div class="feature-card">
+                            <div class="card-icon">📊</div>
+                            <h3 class="card-title">Attendance Tracker</h3>
+                            <p class="card-description">
+                                Know your attendance percentage dynamically. Get alerts when you're below threshold.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="card-icon">📝</div>
+                            <h3 class="card-title">Resource Management</h3>
+                            <p class="card-description">
+                                Upload and organize study materials, question papers, and notes in one place.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="card-icon">📅</div>
+                            <h3 class="card-title">Schedule Planner</h3>
+                            <p class="card-description">
+                                Plan your classes, assignments and exams with an intuitive calendar interface.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="card-icon">📈</div>
+                            <h3 class="card-title">Performance Analysis</h3>
+                            <p class="card-description">
+                                Track academic progress with visual analytics and personalized insights.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="card-icon">💬</div>
+                            <h3 class="card-title">Communication Hub</h3>
+                            <p class="card-description">
+                                Direct messaging between students and teachers for quick resolution of queries.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <button class="scroll-btn scroll-right">
+                        ›
+                    </button>
+                </div>
+            </section>
+
+            <section class="dashboard-preview">
+                <h2 class="section-title">Intuitive Dashboard</h2>
+                <div class="dashboard-container">
+                    <img src="../new-papyrus-fy/illustrations/Uploads.svg" alt="Papyrus dashboard" class="dashboard-image">
+                </div>
+                <div class="dashboard-features">
+                    <div class="dashboard-feature">
+                        <div class="feature-number">01</div>
+                        <h3>Know your Attendance Percentage Dynamically</h3>
+                        <p>Get real-time updates and visual representation of your attendance across subjects.</p>
+                    </div>
+                    <div class="dashboard-feature">
+                        <div class="feature-number">02</div>
+                        <h3>Track Academic Performance</h3>
+                        <p>Monitor grades, assessments, and progress reports all in one place.</p>
+                    </div>
+                    <div class="dashboard-feature">
+                        <div class="feature-number">03</div>
+                        <h3>Resource Library</h3>
+                        <p>Access and manage study materials, assignments, and resources effortlessly.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="upload-section">
+                <h2 class="section-title">Resource Management</h2>
+                <div class="upload-cards">
+                    <div class="upload-card">
+                        <div class="upload-icon">
+                            <img class="Upload1" src="../new-papyrus-fy/illustrations/Imageuploadbro.svg" alt="Upload images">
+                        </div>
+                        <h3>Upload Images</h3>
+                        <p>Share diagrams, charts, and visual study materials with your class.</p>
+                    </div>
+                    <div class="upload-card">
+                        <div class="upload-icon">
+                            <img class="Upload2" src="../new-papyrus-fy/illustrations/Uploads.svg" alt="Upload notes">
+                        </div>
+                        <h3>Upload Notes</h3>
+                        <p>Distribute class notes and study guides in various formats.</p>
+                    </div>
+                    <div class="upload-card">
+                        <div class="upload-icon">
+                            <img class="Upload3" src="../new-papyrus-fy/illustrations/rightallingedupload.png" alt="Upload question papers">
+                        </div>
+                        <h3>Upload Question Papers</h3>
+                        <p>Share practice tests and previous exam papers for better preparation.</p>
+                    </div>
+                </div>
+            </section>
+
+            
+
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2>Ready to enhance your academic journey?</h2>
+                    <p>Join Arnab Bably Nayana's papyrus.</p>
+                    <button class="btn cta-btn">Sign Up Now</button>
+                </div>
+            </section>
+        </main>
+
+        <footer id="contact">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">papyrus</span>
+                    <p>Your Pathway to Productivity</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Product</h4>
+                        <a href="#">Features</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <a href="#">About Us</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Resources</h4>
+                        <a href="#">Documentation</a>
+                        <a href="#">Tutorials</a>
+                        <a href="#">Support</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <a href="mailto:arnabmoysankriti@gmail.com">info@papyrus.edu</a>
+                        <a href="tel:+919707471255">Whatsapp</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <!-- <p>© 2025 Papyrus. All rights reserved.</p> -->
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">FB</a>
+                    <a href="#" aria-label="Twitter">TW</a>
+                    <a href="https://www.instagram.com/arnabbfr?igsh=MWh0eGx2a2QwczB6Mw==" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="LinkedIn">LI</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="LandingPageLogic.js"></script>
+</body>
+</html>

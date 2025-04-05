@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload UI</title>
+  <style>
+    
+  @font-face {
+    font-family:'Garet';
+    src: url('../components/fonts/Web/Garet-Book.woff2')format('woff2'),
+    url('../components/fonts/Web/Garet-Book.woff')format('woff');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family:'Garet';
+    src: url('../components/fonts/Web/Garet-Heavy.woff')format('woff2'),
+    url('../components/fonts/Web/Garet-Heavy.woff')format('woff');
+    font-weight: 700;
+    font-style: normal;
+  }
+  .bold{
+    font-family: 'Garet',sans-serif;
+    font-weight: 700;
+  }
+  .normal{
+    font-family: 'Garet',sans-serif;
+    font-weight: 400;
+  }
+
+ body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #fff5e0;
+}
+.container {
+  background: #fFF;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 800px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #190933;
+  font-size: 2rem;
+  font-family: 'Garet',sans-serif;
+  font-weight: 700;
+}
+        .upload-options {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding: 10px;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .option {
+            background-color: #ffdbc3;
+            border-radius: 15px;
+            padding: 20px;
+            width: 200px;
+            height: 220px;
+            display: flex;
+            flex: 0 0 auto;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-snap-align: start;
+        }
+
+        .option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-icon {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            color: #333;
+        }
+
+        .option-label {
+          /* font-family: 'Garet',sans-serif;
+          font-weight: 400; */
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+        .hidden{
+          display: none;
+      }
+
+        @media (max-width: 680px) {
+            .option {
+                width: 160px;
+                height: 180px;
+            }
+            
+            .option-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 28px;
+            }
+            
+            .option-label {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+            
+            .upload-options {
+                gap: 15px;
+            }
+            
+            .option {
+                width: 130px;
+                height: 150px;
+            }
+            
+            .option-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                object-fit: contain;
+            }
+            
+            .carousel-controls {
+                margin-top: 20px;
+            }
+        }
+        .hidden{
+          display: none;
+      }
+
+/* upload-box*/
+@font-face {
+  font-family:'Garet';
+  src: url('../components/fonts/Web/Garet-Book.woff2')format('woff2'),
+  url('../components/fonts/Web/Garet-Book.woff')format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family:'Garet';
+  src: url('../components/fonts/Web/Garet-Heavy.woff')format('woff2'),
+  url('../components/fonts/Web/Garet-Heavy.woff')format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+.bold{
+  font-family: 'Garet',sans-serif;
+  font-weight: 700;
+}
+.normal{
+  font-family: 'Garet',sans-serif;
+  font-weight: 400;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Garet', sans-serif;
+}
+.upload-box {
+  border: 2px dashed #333;
+  padding: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  margin: 15px 0;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.upload-box:hover {
+  background: #fff5e0;
+}
+
+.upload-box img {
+  width: 24px;
+  margin-bottom: 8px;
+}
+
+.browse {
+  color: #190933;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* File List */
+.uploads {
+  margin-top: 10px;
+  text-align: left;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* Individual File Box */
+.file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f8f8;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  position: relative;
+  font-size: 14px;
+}
+
+.file-name {
+  flex-grow: 1;
+  margin-left: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-size {
+  font-size: 12px;
+  color: rgb(29, 140, 160);
+}
+
+.preview-btn, .upload-btn, .delete-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 6px;
+  transition: 0.2s ease-in-out;
+}
+
+.preview-btn:hover {
+  color: #007bff;
+}
+
+.delete-btn:hover {
+  color: red;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #ddd;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.progress {
+  height: 4px;
+  background: #190933;
+}
+
+
+/* Navigation Buttons */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.close-btn{
+  background-color:#190933;
+  color:#ffdbc3;
+  border-radius: 20%;
+}
+  </style> 
+</head>
+<body>
+      <div class="container">
+        <h1><p class="bold">What are you uploading today?</p></h1>   
+        <!-- <div class="header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+             <div>
+                // Empty div for spacing 
+            <a href="view-interface.html" style="padding: 10px 15px; background-color: #4a6cf7; color: white; border-radius: 4px; text-decoration: none;">View Uploads</a>
+          </div>    -->
+        <div class="upload-options" id="options-container">
+            <div class="option" data-type="question-papers" onclick="showUpload('question-papers')">
+                <div class="option-icon">
+                  <img src="../new-papyrus-fy/illustrations/questions.svg" alt="question-papers" width="200" height="300"></imgsrc>
+                </div>
+                <div class="option-label"><p class="normal">Question Papers</p></div>
+            </div>
+            <div class="option" data-type="photo-gallery" onclick="showUpload('photo-gallery')">
+                <div class="option-icon">
+                  <img src="../new-papyrus-fy/illustrations/Imageuploadbro.svg" alt="photo-gallery" width="200" height="300"></imgsrc>
+                </div>
+                <div class="option-label"><p class="normal">Photo Gallery</p></div>
+            </div>
+            <div class="option" data-type="newsletter" onclick="showUpload('newsletter')">
+                <div class="option-icon">
+                  <img src="../new-papyrus-fy/illustrations/newsletter.png" alt="newsletter" width="200" height="100"></imgsrc>
+                </div>
+                <div class="option-label"><p class="normal">Newsletter</p></div>
+            </div>
+            <div class="option" data-type="notes" onclick="showUpload('notices&minutes')">
+              <div class="option-icon">
+                <img src="../new-papyrus-fy/illustrations/notes.svg" alt="notices" width="200" height="100"></imgsrc>
+              </div>
+              <div class="option-label"><p class="normal">Notices&Minutes</p></div>
+          </div>
+        </div>
+        <!-- Upload Dialog Box -->
+    <div id="upload-dialog" class="upload-dialog " style="display: none;">
+      <div class="upload-box">
+          <h3 id="upload-title"><p bold>Upload</p></h3>
+          <div class="drop-area" id="drop-area">
+              <img src="../new-papyrus-fy/illustrations/notes.svg" alt="Upload">
+              <p>Drop your files here or <span class="browse">browse</span></p>
+              <input type="file" id="file-input" multiple hidden>
+              
+          </div>
+          <div class="uploads" id="uploads-list"></div>
+          <button class="close-btn" onclick="closeDialog()">Close</button>
+      </div>
+      <!-- <div style="margin-top: 20px; text-align: center;">
+        <a href="Viewing.html" style="display: inline-block; padding: 10px 20px; background-color: #190933; color: #ffdbc3; text-decoration: none; border-radius: 5px; font-weight: bold;">View Newsletters</a>
+        <a href="ViewPapers.html" style="display: inline-block; padding: 10px 20px; background-color: #190933; color: #ffdbc3; text-decoration: none; border-radius: 5px; font-weight: bold; margin-left: 10px;">View Question Papers</a>
+    </div> -->
+  </div>
+  <script>
+
+// File handling and localStorage implementation
+document.addEventListener("DOMContentLoaded", function () {
+    const dropArea = document.getElementById("drop-area");
+    const fileInput = document.getElementById("file-input");
+    const uploadsList = document.getElementById("uploads-list");
+    let currentUploadType = "";
+
+    // Open file dialog on click
+    dropArea.addEventListener("click", () => fileInput.click());
+
+    // Handle file selection
+    fileInput.addEventListener("change", function () {
+        handleFiles(fileInput.files);
+    });
+
+    // Drag and drop functionality
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    dropArea.addEventListener('dragenter', () => dropArea.classList.add('highlight'));
+    dropArea.addEventListener('dragleave', () => dropArea.classList.remove('highlight'));
+    dropArea.addEventListener('drop', (e) => {
+        dropArea.classList.remove('highlight');
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles(files);
+    });
+
+    function handleFiles(files) {
+        [...files].forEach(file => {
+            // Create UI element
+            let fileItem = document.createElement("div");
+            fileItem.classList.add("file-item");
+
+            let fileType = file.type.includes("image") ? "🖼" : file.type.includes("pdf") ? "📄" : "📁";
+            const fileId = `file_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+            
+            fileItem.innerHTML = `
+                <span class="file-type">${fileType}</span>
+                <span class="file-name">${file.name}</span>
+                <span class="file-size">${(file.size / 1024 / 1024).toFixed(2)} MB</span>
+                <button class="preview-btn" data-id="${fileId}">👁</button>
+                <button class="delete-btn" data-id="${fileId}">🗑</button>
+                <div class="progress-bar"><div class="progress" style="width: 0%;"></div></div>
+            `;
+
+            uploadsList.appendChild(fileItem);
+
+            // Simulate Upload Progress
+            let progressBar = fileItem.querySelector(".progress");
+            let uploadSpeed = Math.random() * (1000 - 300) + 300;
+            let interval = setInterval(() => {
+                let width = parseInt(progressBar.style.width || "0");
+                if (width >= 100) {
+                    clearInterval(interval);
+                    saveFileToLocalStorage(file, fileId, currentUploadType);
+                } else {
+                    progressBar.style.width = (width + 10) + "%";
+                }
+            }, uploadSpeed);
+
+            // Preview File
+            fileItem.querySelector(".preview-btn").addEventListener("click", () => {
+                let url = URL.createObjectURL(file);
+                window.open(url, "_blank");
+            });
+
+            // Delete File
+            fileItem.querySelector(".delete-btn").addEventListener("click", () => {
+                removeFileFromLocalStorage(fileId);
+                fileItem.remove();
+            });
+        });
+    }
+
+    // Save file to localStorage
+    function saveFileToLocalStorage(file, fileId, category) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const fileData = {
+                id: fileId,
+                name: file.name,
+                type: file.type,
+                category: category,
+                size: file.size,
+                data: event.target.result,
+                uploadDate: new Date().toISOString()
+            };
+            
+            // Get existing files or initialize empty array
+            let files = JSON.parse(localStorage.getItem('papyrusFiles')) || [];
+            files.push(fileData);
+            
+            try {
+                localStorage.setItem('papyrusFiles', JSON.stringify(files));
+                console.log(`File ${file.name} saved to localStorage under ${category}`);
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    alert('Storage quota exceeded! The file is too large to store.');
+                } else {
+                    alert('Failed to save the file to localStorage.');
+                }
+                console.error(e);
+            }
+        };
+        
+        reader.readAsDataURL(file);
+    }
+
+    // Remove file from localStorage
+    function removeFileFromLocalStorage(fileId) {
+        let files = JSON.parse(localStorage.getItem('papyrusFiles')) || [];
+        files = files.filter(file => file.id !== fileId);
+        localStorage.setItem('papyrusFiles', JSON.stringify(files));
+        console.log(`File with ID ${fileId} removed from localStorage`);
+    }
+
+    // Open Upload Dialog with category
+    window.showUpload = function(category) {
+        const dialog = document.getElementById("upload-dialog");
+        const uploadTitle = document.getElementById("upload-title");
+        currentUploadType = category;
+        
+        // Format the category name for display
+        let displayTitle = category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        uploadTitle.innerHTML = `<p class="bold">Upload ${displayTitle}</p>`;
+        
+        dialog.style.display = "block";
+        uploadsList.innerHTML = ''; // Clear previous uploads list
+    };
+
+    // Close Upload Dialog
+    window.closeDialog = function() {
+        const dialog = document.getElementById("upload-dialog");
+        dialog.style.display = "none";
+        uploadsList.innerHTML = ''; // Clear uploads list
+    };
+});
+
+  </script>
+</body>
+</html> 
+

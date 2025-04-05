@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFF5E0;
+            color: #190933;
+            margin: 0;
+            padding: 20px;
+        }
+        .dashboard {
+            max-width: 800px;
+            margin: auto;
+            background: #FFDBC3;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-item-info {
+            background: rgba(25, 9, 51, 0.8);
+            color: white;
+            padding: 8px;
+            font-size: 12px;
+            text-align: center;
+        }
+        .gallery-item-actions {
+            display: flex;
+            justify-content: space-between;
+            background: #EE9E8E;
+            padding: 5px;
+        }
+        .action-btn {
+            background: #190933;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .action-btn:hover {
+            background: #000000;
+        }
+        h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #190933;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .empty-gallery {
+            padding: 20px;
+            color: #555;
+            font-style: italic;
+        }
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+        .fullscreen-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .close-fullscreen {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h2>Photo Gallery</h2>
+        <div class="gallery" id="gallery">
+            <p class="empty-gallery">Loading gallery...</p>
+        </div>
+        <div id="errorMessage" class="error"></div>
+    </div>
+
+    <div id="fullscreenView" class="fullscreen-overlay">
+        <span class="close-fullscreen" onclick="closeFullscreen()">&times;</span>
+        <img id="fullscreenImage" class="fullscreen-image" src="" alt="Fullscreen view">
+    </div>
+
+    <script>
+        // Function to display images from local storage
+        function displayGallery() {
+            const gallery = document.getElementById("gallery");
+            const errorMessage = document.getElementById("errorMessage");
+            
+            try {
+                // Fetch files from local storage
+                const papyrusData = localStorage.getItem('papyrusFiles');
+                
+                if (!papyrusData) {
+                    gallery.innerHTML = "<p class='empty-gallery'>No images available. Upload some photos first!</p>";
+                    return;
+                }
+                
+                const files = JSON.parse(papyrusData);
+                
+                if (!Array.isArray(files) || files.length === 0) {
+                    gallery.innerHTML = "<p class='empty-gallery'>No images available.</p>";
+                    return;
+                }
+                
+                // Filter only image files
+                const imageFiles = files.filter(file => 
+                    file && 
+                    file.type && 
+                    file.type.startsWith('image/') && 
+                    file.category === 'photo-gallery' && 
+                    file.data
+                );
+                
+                if (imageFiles.length === 0) {
+                    gallery.innerHTML = "<p class='empty-gallery'>No images found in the gallery. Upload some photos first!</p>";
+                    return;
+                }
+                
+                // Display the gallery items
+                gallery.innerHTML = imageFiles.map((file, index) => `
+                    <div class="gallery-item">
+                        <img src="${file.data}" alt="${file.name}" onclick="showFullscreen('${file.data}')">
+                        <div class="gallery-item-info">${file.name}</div>
+                        <div class="gallery-item-actions">
+                            <button class="action-btn" onclick="viewImage(${index})">View</button>
+                            <button class="action-btn" onclick="downloadImage(${index})">Download</button>
+                        </div>
+                    </div>
+                `).join("");
+                
+                console.log(`Found ${imageFiles.length} images in local storage`);
+            } catch (error) {
+                gallery.innerHTML = "<p class='empty-gallery'>Error loading gallery.</p>";
+                errorMessage.textContent = `Error: ${error.message}`;
+                console.error("Error loading gallery:", error);
+            }
+        }
+
+        // Function to view image in fullscreen
+        function viewImage(index) {
+            try {
+                const files = JSON.parse(localStorage.getItem('papyrusFiles') || '[]');
+                const imageFiles = files.filter(file => 
+                    file && file.type && file.type.startsWith('image/') && file.category === 'photo-gallery'
+                );
+                
+                if (index >= 0 && index < imageFiles.length) {
+                    showFullscreen(imageFiles[index].data);
+                }
+            } catch (error) {
+                document.getElementById("errorMessage").textContent = `View error: ${error.message}`;
+                console.error("View error:", error);
+            }
+        }
+        
+        // Show fullscreen overlay
+        function showFullscreen(imageSrc) {
+            const fullscreenView = document.getElementById("fullscreenView");
+            const fullscreenImage = document.getElementById("fullscreenImage");
+            
+            fullscreenImage.src = imageSrc;
+            fullscreenView.style.display = "flex";
+            
+            // Prevent scrolling of the background
+            document.body.style.overflow = "hidden";
+        }
+        
+        // Close fullscreen overlay
+        function closeFullscreen() {
+            document.getElementById("fullscreenView").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        // Function to download an image
+        function downloadImage(index) {
+            try {
+                const files = JSON.parse(localStorage.getItem('papyrusFiles') || '[]');
+                const imageFiles = files.filter(file => 
+                    file && file.type && file.type.startsWith('image/') && file.category === 'photo-gallery'
+                );
+                const errorMessage = document.getElementById("errorMessage");
+                errorMessage.textContent = "";
+                
+                if (index >= 0 && index < imageFiles.length) {
+                    const file = imageFiles[index];
+                    
+                    // Check if file has data
+                    if (!file.data) {
+                        errorMessage.textContent = "Image data is missing. Cannot download.";
+                        console.error("Image data missing for:", file.name);
+                        return;
+                    }
+                    
+                    // Create download link
+                    const link = document.createElement('a');
+                    link.href = file.data;
+                    link.download = file.name;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } else {
+                    errorMessage.textContent = "Image index out of range.";
+                }
+            } catch (error) {
+                document.getElementById("errorMessage").textContent = `Download error: ${error.message}`;
+                console.error("Download error:", error);
+            }
+        }
+
+        // Display gallery when page loads
+        document.addEventListener("DOMContentLoaded", displayGallery);
+        
+        // Close fullscreen when Escape key is pressed
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>

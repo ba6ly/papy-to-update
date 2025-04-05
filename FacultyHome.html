@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papyrus - Home</title>
+    <link rel="stylesheet" href="FacultyHome.css"> 
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <a href="#" style="text-decoration: none; color: inherit;">
+            <div class="sidebar-item active">
+                <div class="sidebar-icon"><i class="fas fa-home"></i></div>
+                <div class="sidebar-text">Home</div>
+            </div>
+        </a>
+        <a href="Uploads.html" style="text-decoration: none; color: inherit;">
+            <div class="sidebar-item">
+                <div class="sidebar-icon"><i class="fas fa-upload"></i></div>
+                <div class="sidebar-text">Uploads</div>
+            </div>
+        </a>
+        <a href="Viewing.html" style="text-decoration: none; color: inherit;">
+            <div class="sidebar-item">
+                <div class="sidebar-icon"><i class="fas fa-chart-pie"></i></div>
+                <div class="sidebar-text">Newsletter</div>
+            </div>
+        </a>
+        <a href="AttendanceSystem.html" style="text-decoration: none; color: inherit;">
+            <div class="sidebar-item">
+                <div class="notification-badge">3</div>
+                <div class="sidebar-icon"><i class="fas fa-calendar-check"></i></div>
+                <div class="sidebar-text">Attendance</div>
+            </div>
+        </a>
+        <a href="co-po-attainment.html" style="text-decoration: none; color: inherit;">
+            <div class="sidebar-item">
+                <div class="sidebar-icon"><i class="fas fa-book"></i></div>
+                <div class="sidebar-text">Attainment</div>
+            </div>
+        </a>
+        <a href="#" style="text-decoration: none; color: inherit;">
+            <div class="sidebar-item" id="settings-item"    >
+                <div class="sidebar-icon"><i class="fas fa-cog"></i></div>
+                <div class="sidebar-text">Settings</div>
+
+                <div class="settings-dropdown" id="settings-dropdown">
+                    <!-- <a href="#" class="dropdown-item">
+                        <i class="fas fa-sliders-h"></i> Preferences
+                    </a> -->
+                    <a href="LandingPage.html" class="dropdown-item logout-item">
+                        <i class="fas fa-sign-out-alt"></i> Log Out
+                    </a>
+                </div>
+
+            </div>
+        </a>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Header with Logo and User Profile -->
+        <div class="header">
+            <div class="logo">papy<span>rus</span></div>
+            <div class="user-profile">A</div>
+        </div>
+
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <h2 class="welcome-title">Welcome back!</h2>
+            <p class="welcome-message">You have 3 upcoming classes today and 2 assignments due this week. Keep up the good work!</p>
+            <button onclick="NavToScheduleView()" class="get-started-btn">View Schedule</button>
+        </div>
+
+        <!-- Dashboard Stats -->
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-title">Total Registered Students</div>
+                <div class="stat-number">30</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Total Registered Faculty</div>
+                <div class="stat-number">8</div>
+            </div>
+        </div>
+
+        <!-- Quick Access Features -->
+       <!-- Faculty Quick Stats Section -->
+<!-- <div class="faculty-stats">
+    <div class="stat-box">
+        <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+        <div class="stat-info">
+            <div class="stat-number">87%</div>
+            <div class="stat-label">Average Attendance</div>
+        </div>
+    </div>
+    
+    <div class="stat-box">
+        <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+        <div class="stat-info">
+            <div class="stat-number">12</div>
+            <div class="stat-label">Resources Uploaded</div>
+        </div>
+    </div>
+    
+    <div class="stat-box">
+        <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+        <div class="stat-info">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Classes Today</div>
+        </div>
+    </div>
+    
+    <div class="stat-box">
+        <div class="stat-icon"><i class="fas fa-tasks"></i></div>
+        <div class="stat-info">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Pending Tasks</div>
+        </div>
+    </div>
+</div> -->
+
+        <!-- Upcoming Classes Section -->
+        <h3 class="section-title">Today's Schedule</h3>
+        <div class="upcoming-classes">
+            <div class="class-card">
+                <div class="class-time">09:00 - 10:00</div>
+                <div class="class-details">
+                    <h4>Data Structures</h4>
+                    <p>Room Language Lab • 4th Sem • 40 students</p>
+                </div>
+                <div class="class-actions">
+                    <button class="action-btn"><i class="fas fa-clipboard-check"></i></button>
+                    <button class="action-btn"><i class="fas fa-file-upload"></i></button>
+                </div>
+            </div>
+            
+            <div class="class-card">
+                <div class="class-time">11:00 - 12:00</div>
+                <div class="class-details">
+                    <h4>Artificial Intelligence</h4>
+                    <p>Room 106 • 6th Sem • 30 students</p>
+                </div>
+                <div class="class-actions">
+                    <button class="action-btn"><i class="fas fa-clipboard-check"></i></button>
+                    <button class="action-btn"><i class="fas fa-file-upload"></i></button>
+                </div>
+            </div>
+            
+            <div class="class-card">
+                <div class="class-time">14:00 - 15:30</div>
+                <div class="class-details">
+                    <h4>Data Structures</h4>
+                    <p>Lab 1 • 6th Sem • 30 students</p>
+                </div>
+                <div class="class-actions">
+                    <button class="action-btn"><i class="fas fa-clipboard-check"></i></button>
+                    <button class="action-btn"><i class="fas fa-file-upload"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Recent Viewed Section -->
+        <h3 class="section-title">Recently Viewed</h3>
+        <div class="recent-items">
+            <div class="recent-item">
+                <div class="item-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="item-details">
+                    <h4>Data Structures Notes</h4>
+                    <p>Accessed 2 hours ago</p>
+                </div>
+            </div>
+            <div class="recent-item">
+                <div class="item-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="item-details">
+                    <h4>Algorithm Assignment</h4>
+                    <p>Due in 3 days</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions Section -->
+        <h3 class="section-title">Quick Actions</h3>
+    <div class="quick-actions">
+        <a href="AttendanceSystem.html" style="text-decoration: none; color: inherit;">
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <h4 class="action-title">Mark Attendance</h4>
+                <p class="action-desc">Record today's attendance</p>
+            </div>
+        </a>
+        
+        <a href="Uploads.html" style="text-decoration: none; color: inherit;">
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-file-upload"></i>
+                </div>
+                <h4 class="action-title">Upload Resource</h4>
+                <p class="action-desc">Share study materials</p>
+            </div>
+        </a>
+        
+        <a href="schedule-planner.html" style="text-decoration: none; color: inherit;">
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-calendar-plus"></i>
+                </div>
+                <h4 class="action-title">Schedule Event</h4>
+                <p class="action-desc">Create class or meeting</p>
+            </div>
+        </a>
+        
+        <a href="view-photos.html" style="text-decoration: none; color: inherit;">
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h4 class="action-title">Photo Gallery</h4>
+                <p class="action-desc">View photos</p>
+            </div>
+        </a>
+    </div>
+
+     <!-- Bottom Navigation for Mobile -->
+     <div class="bottom-nav">
+        <a href="home.html" style="text-decoration: none; width: 20%;">
+            <div class="nav-item active">
+                <div class="nav-icon"><i class="fas fa-home"></i></div>
+                <div class="nav-text">Home</div>
+            </div>
+        </a>
+        
+        <a href="uploads.html" style="text-decoration: none; width: 20%;">
+            <div class="nav-item">
+                <div class="nav-icon"><i class="fas fa-upload"></i></div>
+                <div class="nav-text">Uploads</div>
+            </div>
+        </a>
+        
+        <a href="dashboard.html" style="text-decoration: none; width: 20%;">
+            <div class="nav-item">
+                <div class="nav-icon"><i class="fas fa-chart-pie"></i></div>
+                <div class="nav-text">Dashboard</div>
+            </div>
+        </a>
+    <script>
+        // Simple JavaScript to handle active states and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sidebar items
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Bottom nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+        // Get references to the cards
+        const attendanceCard = document.getElementById('student-card');
+        const uploadCard = document.getElementById('teacher-card');
+        const eventCard = document.getElementById('teacher-card');
+        const reportsCard = document.getElementById('teacher-card');
+        
+        // Function to handle card clicks
+        function handleCardClick(card) {
+        // Add clicked class for visual feedback
+        card.classList.add('clicked');
+        
+        // Get the redirect URL from the data-redirect attribute
+        const redirectUrl = card.getAttribute('data-redirect');
+        
+        // Redirect after a small delay for the animation to complete
+        setTimeout(() => {
+            window.location.href = "SignUp.html";
+        }, 300);
+        }
+
+        function handleTeacherCardClick(card) {
+        // Add clicked class for visual feedback
+        card.classList.add('clicked');
+        
+        // Get the redirect URL from the data-redirect attribute
+        const redirectUrl = card.getAttribute('data-redirect');
+        
+        // Redirect after a small delay for the animation to complete
+        setTimeout(() => {
+            window.location.href = "Faculty-signup.html";
+        }, 300);
+        }
+        
+        // Add click event listeners to each card
+        studentCard.addEventListener('click', function() {
+        handleCardClick(this);
+        });
+        
+        teacherCard.addEventListener('click', function() {
+            handleTeacherCardClick(this);
+        });
+        
+        // Add click event listeners to the buttons inside the cards
+        const studentButton = studentCard.querySelector('.sign-up-btn');
+        const teacherButton = teacherCard.querySelector('.sign-up-btn');
+        
+        studentButton.addEventListener('click', function(event) {
+        // Prevent the event from bubbling up to the card
+        event.stopPropagation();
+        handleCardClick(studentCard);
+        });
+        
+        teacherButton.addEventListener('click', function(event) {
+        // Prevent the event from bubbling up to the card
+        event.stopPropagation();
+        handleCardClick(teacherCard);
+        });
+
+       document.addEventListener('DOMContentLoaded', function() {
+        const settingsItem = document.getElementById('settings-item');
+        
+        settingsItem.addEventListener('click', function(e) {
+            e.preventDefault();
+            this.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking elsewhere
+        document.addEventListener('click', function(e) {
+            if (!settingsItem.contains(e.target)) {
+                settingsItem.classList.remove('active');
+            }
+        });
+    });
+    </script>
+</body>
+</html>

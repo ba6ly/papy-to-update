@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <style>
+        /* General Styles */
+        @font-face {
+
+        font-family:'Garet';
+        src: url('../new-papyrus-fy/fonts/Web/Garet-Book.woff2') format('woff2'),
+        url('../new-papyrus-fy/fonts/Web/Garet-Book.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+
+        }
+
+        @font-face {
+
+        font-family:'Garet';
+        src: url('../new-papyrus-fy/fonts/Web/Garet-Heavy.woff') format('woff2')
+        url('../new-papyrus-fy/fonts/Web/Garet-Heavy.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+
+        }
+
+        .bold{
+
+        font-family: 'Garet', sans-serif;
+        font-weight: 700;
+        }
+
+        .normal{
+        font-family: 'Garet', sans-serif;
+        font-weight: 400;
+        }
+        
+        body {
+            background: linear-gradient(to left, #e2c4b6, #8a839a);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Garet', sans-serif;
+        }
+        
+        /* SignUp Container */
+        .signup-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* SignUp Box */
+        .signup-box {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            color: #190933;
+            font-weight: 700;
+        }
+        
+        p {
+            color: #666;
+            font-weight: 300;
+        }
+        
+        a {
+            color: #e58f7a;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-size: 14px;
+            margin: 10px 0 5px;
+        }
+        
+        input {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #e2c4b6;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: 'Garet';
+            font-weight: 500;
+        }
+        
+        button {
+            background: #e58f7a;
+            color: #190933;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 6px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #bc7667;
+        }
+        
+        /* Success Message */
+        .success-message {
+            color: green;
+            font-weight: bold;
+        }
+
+          /* Error Message */
+          .error-message {
+            color: red;
+            font-weight: bold;
+        }
+        
+        
+        /* Illustration Animation */
+        .signup-illustration {
+            flex: 1.2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideIn 1.5s ease-in-out forwards;
+        }
+        
+        .signup-illustration img {
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        /* Animation */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100vw);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        /* RESPONSIVE DESIGN */
+        
+        /* Tablets (max-width: 900px) */
+        @media (max-width: 900px) {
+            .signup-container {
+                flex-direction: column;
+                width: 90%;
+                padding: 15px;
+            }
+        
+            .signup-box {
+                text-align: center;
+            }
+        
+            .signup-illustration img {
+                max-width: 300px;
+            }
+        }
+        
+        /* Mobile Devices (max-width: 600px) */
+        @media (max-width: 600px) {
+            .signup-container {
+                width: 95%;
+                padding: 10px;
+            }
+        
+            .signup-box {
+                width: 100%;
+                text-align: center;
+            }
+        
+            form {
+                width: 100%;
+            }
+        
+            input {
+                width: 90%;
+                margin: 0 auto;
+            }
+        
+            button {
+                width: 90%;
+                margin: 10px auto;
+            }
+        
+            .signup-illustration img {
+                width: 60%;
+                max-width: 250px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-illustration">
+            <img class="student" src="../new-papyrus-fy/illustrations/student.png" alt="student illustration">
+        </div>
+
+        <div class="signup-box">
+            <div style="font-family: 'Garet'">
+                <h2><p class="bold">Create New Account</p></h2>
+            </div>
+            <p>Already Registered? <a href="login.html">Login</a></p>
+
+            <div id="formContainer">
+                <div id="messageDiv"></div>
+                <form id="signupForm" action="./signup.php" method="POST">
+                    <label for="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="*******"
+                        required
+                    >
+
+                    <label for="dob">Date of Birth</label>
+                    <input
+                        type="date"
+                        id="dob"
+                        name="dob"
+                        required
+                    >
+
+                    <button type="submit">SIGN UP</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+         document.addEventListener('DOMContentLoaded', function() {
+        const signupForm = document.getElementById('signupForm');
+        const formContainer = document.getElementById('formContainer');
+        const messageDiv = document.getElementById('messageDiv');
+        
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const dob = document.getElementById('dob').value;
+
+            //  create form data object
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('password', password);
+            formData.append('dob', dob);
+
+            // Send data to server using fetch API
+            fetch('signup.php', { // Remove ./ for consistency
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    messageDiv.innerHTML = `<p class="success-message">✅ ${data.message} Redirecting to login...</p>`;
+                    
+                    // Redirect to login page after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = "login.html";
+                    }, 2000);
+                } else {
+                    messageDiv.innerHTML = `<p class="error-message">❌ ${data.message}</p>`;
+                }
+            })
+            .catch(error => {
+                messageDiv.innerHTML = `<p class="error-message">❌ An error occurred. Please try again.</p>`;
+                console.error('Error:', error);
+            });
+        });
+    });
+    </script>
+</body>
+</html>

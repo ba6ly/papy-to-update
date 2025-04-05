@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notices & Minutes</title>
+    <style>
+        @font-face {
+          font-family:'Garet';
+          src: url('../components/fonts/Web/Garet-Book.woff2')format('woff2'),
+          url('../components/fonts/Web/Garet-Book.woff')format('woff');
+          font-weight: 400;
+          font-style: normal;
+        }
+        @font-face {
+          font-family:'Garet';
+          src: url('../components/fonts/Web/Garet-Heavy.woff2')format('woff2'),
+          url('../components/fonts/Web/Garet-Heavy.woff')format('woff');
+          font-weight: 700;
+          font-style: normal;
+        }
+        .bold{
+          font-family: 'Garet',sans-serif;
+          font-weight: 700;
+        }
+        .normal{
+          font-family: 'Garet',sans-serif;
+          font-weight: 400;
+        }
+
+        body {
+            font-family: 'Garet', sans-serif;
+            background-color: #FFF5E0;
+            color: #190933;
+            margin: 0;
+            padding: 20px;
+        }
+        .dashboard {
+            max-width: 800px;
+            margin: auto;
+            background: #FFDBC3;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .file-list li {
+            background: #EE9E8E;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .download-btn, .view-btn {
+            background: #190933;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .download-btn:hover, .view-btn:hover {
+            background: #000000;
+        }
+        h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #190933;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .back-btn {
+            background: #190933;
+            color: #ffdbc3;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .back-btn:hover {
+            background: #000000;
+        }
+        .no-files {
+            padding: 20px;
+            font-style: italic;
+            color: #666;
+        }
+        .file-date {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 5px;
+        }
+        .file-size {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .file-info {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h2 class="bold">Notices & Minutes</h2>
+        <div id="file-container">
+            <ul class="file-list" id="fileList">
+                <li class="normal">Loading files...</li>
+            </ul>
+        </div>
+        <div id="errorMessage" class="error"></div>
+        <button class="back-btn" onclick="window.location.href='Uploads.html'">Back to Upload</button>
+    </div>
+
+    <script>
+        // Function to format the file size
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' bytes';
+            else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            else return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+        
+        // Function to format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        }
+
+        // Function to display files from local storage
+        function displayFiles() {
+            const fileList = document.getElementById("fileList");
+            const errorMessage = document.getElementById("errorMessage");
+            
+            try {
+                // Fetch files from local storage
+                const papyrusData = localStorage.getItem('papyrusFiles');
+                
+                if (!papyrusData) {
+                    fileList.innerHTML = "<li class='no-files normal'>No files available yet. Please upload notices or minutes first.</li>";
+                    return;
+                }
+                
+                const allFiles = JSON.parse(papyrusData);
+                
+                // Filter only notices&minutes files
+                const noticesFiles = allFiles.filter(file => file && file.category === 'notices&minutes');
+                
+                if (!noticesFiles || noticesFiles.length === 0) {
+                    fileList.innerHTML = "<li class='no-files normal'>No notices or minutes available yet. Please upload some first.</li>";
+                    return;
+                }
+                
+                fileList.innerHTML = noticesFiles.map((file, index) => `
+                    <li>
+                        <div class="file-info">
+                            <span class="normal">${file.name}</span>
+                            <span class="file-date">Uploaded: ${file.uploadDate ? formatDate(file.uploadDate) : 'Unknown date'}</span>
+                            <span class="file-size">${file.size ? formatFileSize(file.size) : 'Size unknown'}</span>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="view-btn" onclick="viewFile(${index}, ${allFiles.indexOf(file)})">View</button>
+                            <button class="download-btn" onclick="downloadFile(${allFiles.indexOf(file)})">Download</button>
+                        </div>
+                    </li>
+                `).join("");
+                
+                console.log(`Found ${noticesFiles.length} notices and minutes files in local storage`);
+            } catch (error) {
+                fileList.innerHTML = "<li class='normal'>Error loading files.</li>";
+                errorMessage.textContent = `Error: ${error.message}`;
+                console.error("Error loading files:", error);
+            }
+        }
+
+        // Function to view a file
+        function viewFile(noticeIndex, globalIndex) {
+            try {
+                const files = JSON.parse(localStorage.getItem('papyrusFiles') || '[]');
+                const errorMessage = document.getElementById("errorMessage");
+                errorMessage.textContent = "";
+                
+                if (globalIndex >= 0 && globalIndex < files.length) {
+                    const file = files[globalIndex];
+                    
+                    // Check if file has data
+                    if (!file.data) {
+                        errorMessage.textContent = "File content is missing. Cannot view.";
+                        console.error("File content missing for:", file.name);
+                        return;
+                    }
+                    
+                    // Open the file in a new tab/window
+                    const newWindow = window.open('', '_blank');
+                    
+                    // If it's a PDF, display it directly in the new window
+                    if (file.type === 'application/pdf') {
+                        newWindow.location = file.data;
+                    } 
+                    // If it's an image, display it as an image
+                    else if (file.type.startsWith('image/')) {
+                        newWindow.document.write(`
+                            <html>
+                                <head>
+                                    <title>${file.name}</title>
+                                    <style>
+                                        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f0f0; }
+                                        img { max-width: 95%; max-height: 95%; }
+                                    </style>
+                                </head>
+                                <body>
+                                    <img src="${file.data}" alt="${file.name}" />
+                                </body>
+                            </html>
+                        `);
+                    }
+                    // For other file types, try to display or download based on type
+                    else {
+                        newWindow.location = file.data;
+                    }
+                } else {
+                    errorMessage.textContent = "File index out of range.";
+                }
+            } catch (error) {
+                document.getElementById("errorMessage").textContent = `View error: ${error.message}`;
+                console.error("View error:", error);
+            }
+        }
+
+        // Function to download a file
+        function downloadFile(index) {
+            try {
+                const files = JSON.parse(localStorage.getItem('papyrusFiles') || '[]');
+                const errorMessage = document.getElementById("errorMessage");
+                errorMessage.textContent = "";
+                
+                if (index >= 0 && index < files.length) {
+                    const file = files[index];
+                    
+                    // Check if file has data
+                    if (!file.data) {
+                        errorMessage.textContent = "File content is missing. Cannot download.";
+                        console.error("File content missing for:", file.name);
+                        return;
+                    }
+                    
+                    // Create download link
+                    const link = document.createElement('a');
+                    link.href = file.data;
+                    link.download = file.name;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } else {
+                    errorMessage.textContent = "File index out of range.";
+                }
+            } catch (error) {
+                document.getElementById("errorMessage").textContent = `Download error: ${error.message}`;
+                console.error("Download error:", error);
+            }
+        }
+
+        // Function to clear all notices and minutes
+        function clearNotices() {
+            if (confirm("Are you sure you want to clear all notices and minutes? This action cannot be undone.")) {
+                try {
+                    // Get all files from localStorage
+                    const papyrusData = localStorage.getItem('papyrusFiles');
+                    
+                    if (!papyrusData) {
+                        alert("No data found in storage.");
+                        return;
+                    }
+                    
+                    let files = JSON.parse(papyrusData);
+                    
+                    // Filter out notices&minutes files
+                    const filteredFiles = files.filter(file => file.category !== 'notices&minutes');
+                    
+                    // Save the filtered files back to localStorage
+                    localStorage.setItem('papyrusFiles', JSON.stringify(filteredFiles));
+                    
+                    // Refresh the display
+                    alert("All notices and minutes have been cleared successfully.");
+                    displayFiles();
+                    
+                    console.log("Notices and minutes cleared from localStorage");
+                } catch (error) {
+                    alert(`Error clearing notices and minutes: ${error.message}`);
+                    console.error("Error clearing notices and minutes:", error);
+                }
+            }
+        }
+
+        // Add this to window object to make it accessible from HTML
+        window.clearNotices = clearNotices;
+        
+        // Display files when page loads
+        document.addEventListener("DOMContentLoaded", displayFiles);
+    </script>
+</body>
+</html>

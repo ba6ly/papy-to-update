@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #FFF5E0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .container {
+      text-align: center;
+      width: 100%;
+      max-width: 1000px;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: #190933;
+      margin-bottom: 50px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-shadow: 1px 1px 3px rgba(25, 9, 51, 0.1);
+    }
+    
+    .cards-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .card {
+      background-color: white;
+      width: 300px;
+      height: 380px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(25, 9, 51, 0.15);
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(25, 9, 51, 0.2);
+    }
+    
+    .card-header {
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    
+    .student-header {
+      background-color: #EE9E8E;
+    }
+    
+    .teacher-header {
+      background-color: #FFDBC3;
+    }
+    
+    .card-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 80px;
+      box-shadow: 0 5px 15px rgba(25, 9, 51, 0.1);
+    }
+    
+    .card-icon svg {
+      width: 40px;
+      height: 40px;
+      fill: #190933;
+    }
+    
+    .card-content {
+      padding: 50px 25px 25px;
+      height: calc(100% - 120px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .card-title {
+      color: #190933;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .card-text {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 30px;
+    }
+    
+    .sign-up-btn {
+      background-color: #190933;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .student-btn:hover {
+      background-color: #EE9E8E;
+    }
+    
+    .teacher-btn:hover {
+      background-color: #FFDBC3;
+      color: #190933;
+    }
+    
+    .decoration {
+      position: absolute;
+      z-index: -1;
+    }
+    
+    .circle-1 {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: rgba(238, 158, 142, 0.15);
+      top: -100px;
+      left: -100px;
+    }
+    
+    .circle-2 {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: rgba(255, 219, 195, 0.2);
+      bottom: 50px;
+      right: 100px;
+    }
+    
+    .circle-3 {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: rgba(25, 9, 51, 0.05);
+      top: 100px;
+      right: -50px;
+    }
+    
+    /* Animation for feedback when clicking */
+    .card.clicked {
+      transform: scale(0.95);
+      opacity: 0.8;
+      transition: all 0.2s ease;
+    }
+    
+    @media (max-width: 768px) {
+      .cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .card {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="decoration circle-1"></div>
+  <div class="decoration circle-2"></div>
+  <div class="decoration circle-3"></div>
+  
+  <div class="container">
+    <h1>Choose your path to learning</h1>
+    
+    <div class="cards-container">
+      <!-- Student Card -->
+      <div class="card" id="student-card" data-redirect="student-signup.html">
+        <div class="card-header student-header">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="card-content">
+          <div>
+            <h2 class="card-title">Sign Up as a Student</h2>
+            <p class="card-text">Access courses, interact with teachers, and track your progress. Start your learning journey today!</p>
+          </div>
+          <button class="sign-up-btn student-btn">Get Started</button>
+        </div>
+      </div>
+      
+      <!-- Teacher Card -->
+      <div class="card" id="teacher-card" data-redirect="teacher-signup.html">
+        <div class="card-header teacher-header">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M20 17a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H9.46c.35.61.54 1.3.54 2h10v11h-9v2h9zM15 7v2H9v2h6v2l4-3-4-3zm-4.54-1H9l-4 2-2-2v12l2-2 2.05 1.03L7 15v-2l4 2v-2L7 9V7l4.46-1z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="card-content">
+          <div>
+            <h2 class="card-title">Sign Up as a Teacher</h2>
+            <p class="card-text">Create courses, connect with students, and share your knowledge with a global audience.</p>
+          </div>
+          <button class="sign-up-btn teacher-btn">Join Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get references to the cards
+    const studentCard = document.getElementById('student-card');
+    const teacherCard = document.getElementById('teacher-card');
+    
+    // Function to handle card clicks
+    function handleCardClick(card) {
+      // Add clicked class for visual feedback
+      card.classList.add('clicked');
+      
+      // Get the redirect URL from the data-redirect attribute
+      const redirectUrl = card.getAttribute('data-redirect');
+      
+      // Redirect after a small delay for the animation to complete
+      setTimeout(() => {
+        window.location.href = "SignUp.html";
+      }, 300);
+    }
+
+    function handleTeacherCardClick(card) {
+      // Add clicked class for visual feedback
+      card.classList.add('clicked');
+      
+      // Get the redirect URL from the data-redirect attribute
+      const redirectUrl = card.getAttribute('data-redirect');
+      
+      // Redirect after a small delay for the animation to complete
+      setTimeout(() => {
+        window.location.href = "Faculty-signup.html";
+      }, 300);
+    }
+    
+    // Add click event listeners to each card
+    studentCard.addEventListener('click', function() {
+      handleCardClick(this);
+    });
+    
+    teacherCard.addEventListener('click', function() {
+        handleTeacherCardClick(this);
+    });
+    
+    // Add click event listeners to the buttons inside the cards
+    const studentButton = studentCard.querySelector('.sign-up-btn');
+    const teacherButton = teacherCard.querySelector('.sign-up-btn');
+    
+    studentButton.addEventListener('click', function(event) {
+      // Prevent the event from bubbling up to the card
+      event.stopPropagation();
+      handleCardClick(studentCard);
+    });
+    
+    teacherButton.addEventListener('click', function(event) {
+      // Prevent the event from bubbling up to the card
+      event.stopPropagation();
+      handleCardClick(teacherCard);
+    });
+  </script>
+</body>
+</html>

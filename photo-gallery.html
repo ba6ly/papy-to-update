@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Photo Gallery</title>
+  <link rel="stylesheet" href="file-system.css">
+</head>
+<body>
+  <h1>Photo Gallery</h1>
+  
+  <button onclick="showUpload('photo-gallery')">Add Photo</button>
+  
+  <div id="photoGallery" class="gallery-container">
+    <!-- Photos will be displayed here -->
+  </div>
+  
+  <!-- Upload Dialog -->
+  <div id="upload-dialog" style="display: none;">
+    <!-- Upload dialog content (as shown above) -->
+  </div>
+  
+  <script src="file-storage.js"></script>
+  <script src="upload-interface.js"></script>
+  <script src="file-viewer.js"></script>
+</body>
+</html>

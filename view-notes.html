@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        @font-face {
+            font-family:'Garet';
+            src: url('../new-papyrus-fy/fonts/Web/Garet-Book.woff2') format('woff2'),
+            url('../new-papyrus-fy/fonts/Web/Garet-Book.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family:'Garet';
+            src: url('../new-papyrus-fy/fonts/Web/Garet-Heavy.woff2') format('woff2'),
+            url('../new-papyrus-fy/fonts/Web/Garet-Heavy.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .bold {
+            font-family: 'Garet', sans-serif;
+            font-weight: 700;
+        }
+
+        .normal {
+            font-family: 'Garet', sans-serif;
+            font-weight: 400;
+        }
+        
+        :root {
+            --dark-purple: #190933;
+            --peach: #ffdbc3;
+            --cream: #fff5e0;
+            --coral: #ee9e8e;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Garet', sans-serif;
+            background-color: var(--cream);
+            color: var(--dark-purple);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: var(--dark-purple);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .notes-container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(25, 9, 51, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--peach);
+            color: var(--dark-purple);
+            background-color: white;
+            font-family: 'Garet', sans-serif;
+        }
+        
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 0;
+        }
+        
+        .note-card {
+            background-color: var(--peach);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .note-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(25, 9, 51, 0.1);
+        }
+        
+        .note-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark-purple);
+        }
+        
+        .note-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+        
+        .note-date {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .note-size {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .note-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+        
+        .btn {
+            background-color: var(--coral);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #e08c7c;
+        }
+        
+        .btn-secondary {
+            background-color: var(--dark-purple);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2a0f4f;
+        }
+        
+        .no-notes {
+            text-align: center;
+            padding: 3rem 0;
+            color: #666;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--dark-purple);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .notes-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .notes-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="uploads.html" class="back-link">← Back to Upload</a>
+        
+        <header>
+            <h1><p class="bold">Notes & Minutes</p></h1>
+            <p class="normal">View and download all uploaded notes and meeting minutes</p>
+        </header>
+        
+        <div class="notes-container">
+            <div class="notes-header">
+                <h2><p class="bold">All Documents</p></h2>
+                <div class="filter-container">
+                    <select id="sort-filter" class="filter-select">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="notes-grid" id="notes-grid">
+                <!-- Notes will be dynamically inserted here -->
+                <div class="no-notes" id="no-notes">
+                    <p class="normal">No notes or minutes have been uploaded yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNotes();
+            
+            // Add event listener for sort filter
+            document.getElementById('sort-filter').addEventListener('change', function() {
+                loadNotes();
+            });
+            
+            function loadNotes() {
+                const notesGrid = document.getElementById('notes-grid');
+                const noNotesMessage = document.getElementById('no-notes');
+                const sortFilter = document.getElementById('sort-filter').value;
+                
+                // Retrieve files from localStorage
+                let files = JSON.parse(localStorage.getItem('papyrusFiles')) || [];
+                
+                // Filter only notes & minutes files
+                const notesFiles = files.filter(file => file.category === 'notices&minutes');
+                
+                // Sort files based on selected filter
+                switch(sortFilter) {
+                    case 'newest':
+                        notesFiles.sort((a, b) => new Date(b.uploadDate) - new Date(a.uploadDate));
+                        break;
+                    case 'oldest':
+                        notesFiles.sort((a, b) => new Date(a.uploadDate) - new Date(b.uploadDate));
+                        break;
+                    case 'name-asc':
+                        notesFiles.sort((a, b) => a.name.localeCompare(b.name));
+                        break;
+                    case 'name-desc':
+                        notesFiles.sort((a, b) => b.name.localeCompare(a.name));
+                        break;
+                }
+                
+                // Clear previous content
+                notesGrid.innerHTML = '';
+                
+                // Display no notes message if no files found
+                if (notesFiles.length === 0) {
+                    noNotesMessage.style.display = 'block';
+                    return;
+                } else {
+                    noNotesMessage.style.display = 'none';
+                }
+                
+                // Create cards for each note
+                notesFiles.forEach(file => {
+                    const fileDate = new Date(file.uploadDate);
+                    const formattedDate = fileDate.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                    
+                    // Determine file icon based on type
+                    let fileIcon = '📄';
+                    if (file.type.includes('pdf')) {
+                        fileIcon = '📑';
+                    } else if (file.type.includes('word') || file.type.includes('document')) {
+                        fileIcon = '📝';
+                    } else if (file.type.includes('text')) {
+                        fileIcon = '📋';
+                    }
+                    
+                    // Format file size
+                    const fileSize = formatFileSize(file.size);
+                    
+                    // Create note card
+                    const noteCard = document.createElement('div');
+                    noteCard.className = 'note-card';
+                    noteCard.innerHTML = `
+                        <div class="note-icon">${fileIcon}</div>
+                        <h3 class="note-title">${file.name}</h3>
+                        <div class="note-date">Uploaded on ${formattedDate}</div>
+                        <div class="note-size">${fileSize}</div>
+                        <div class="note-actions">
+                            <a href="#" class="btn view-btn" data-id="${file.id}">View</a>
+                            <a href="#" class="btn btn-secondary download-btn" data-id="${file.id}">Download</a>
+                        </div>
+                    `;
+                    
+                    notesGrid.appendChild(noteCard);
+                });
+                
+                // Add event listeners for view and download buttons
+                document.querySelectorAll('.view-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const fileId = this.getAttribute('data-id');
+                        viewFile(fileId);
+                    });
+                });
+                
+                document.querySelectorAll('.download-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const fileId = this.getAttribute('data-id');
+                        downloadFile(fileId);
+                    });
+                });
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(1024));
+                
+                return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            function viewFile(fileId) {
+                const files = JSON.parse(localStorage.getItem('papyrusFiles')) || [];
+                const file = files.find(f => f.id === fileId);
+                
+                if (file) {
+                    // Open file in new window or tab
+                    const newWindow = window.open('', '_blank');
+                    
+                    if (file.type.includes('pdf') || file.type.includes('image')) {
+                        // For PDFs and images, directly show the file
+                        newWindow.document.write(`
+                            <html>
+                                <head>
+                                    <title>${file.name}</title>
+                                    <style>
+                                        body { margin: 0; display: flex; justify-content: center; }
+                                        object, img { max-width: 100%; height: auto; }
+                                    </style>
+                                </head>
+                                <body>
+                                    ${file.type.includes('pdf') 
+                                        ? `<object data="${file.data}" type="application/pdf" width="100%" height="100%">
+                                            <p>Unable to display PDF. <a href="${file.data}" download="${file.name}">Download</a> instead.</p>
+                                          </object>`
+                                        : `<img src="${file.data}" alt="${file.name}" />`
+                                    }
+                                </body>
+                            </html>
+                        `);
+                    } else if (file.type.includes('text')) {
+                        // For text files, attempt to display content
+                        fetch(file.data)
+                            .then(response => response.text())
+                            .then(text => {
+                                newWindow.document.write(`
+                                    <html>
+                                        <head>
+                                            <title>${file.name}</title>
+                                            <style>
+                                                body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+                                                pre { white-space: pre-wrap; }
+                                            </style>
+                                        </head>
+                                        <body>
+                                            <h1>${file.name}</h1>
+                                            <pre>${text}</pre>
+                                        </body>
+                                    </html>
+                                `);
+                            })
+                            .catch(error => {
+                                // If can't read as text, provide download link
+                                newWindow.document.write(`
+                                    <html>
+                                        <head>
+                                            <title>${file.name}</title>
+                                            <style>
+                                                body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+                                            </style>
+                                        </head>
+                                        <body>
+                                            <h1>Cannot display this file directly</h1>
+                                            <p>This file type cannot be previewed in the browser.</p>
+                                            <p><a href="${file.data}" download="${file.name}">Click here to download</a></p>
+                                        </body>
+                                    </html>
+                                `);
+                            });
+                    } else {
+                        // For other file types, provide download link
+                        newWindow.document.write(`
+                            <html>
+                                <head>
+                                    <title>${file.name}</title>
+                                    <style>
+                                        body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+                                    </style>
+                                </head>
+                                <body>
+                                    <h1>Cannot display this file directly</h1>
+                                    <p>This file type cannot be previewed in the browser.</p>
+                                    <p><a href="${file.data}" download="${file.name}">Click here to download</a></p>
+                                </body>
+                            </html>
+                        `);
+                    }
+                    
+                    newWindow.document.close();
+                }
+            }
+            
+            function downloadFile(fileId) {
+                const files = JSON.parse(localStorage.getItem('papyrusFiles')) || [];
+                const file = files.find(f => f.id === fileId);
+                
+                if (file) {
+                    // Create download link
+                    const a = document.createElement('a');
+                    a.href = file.data;
+                    a.download = file.name;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

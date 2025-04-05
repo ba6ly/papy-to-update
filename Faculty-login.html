@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Garet&display=swap');
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ffdbc3, #190933);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        /* Login Container */
+        .login-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Login Box */
+        .login-box {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            color: #333;
+        }
+        
+        p {
+            color: #666;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-size: 14px;
+            margin: 10px 0 5px;
+        }
+        
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        
+        button {
+            background: #e58f7a;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #d77a64;
+        }
+
+        /* Message styles */
+        .success-message {
+            color: green;
+            font-weight: bold;
+        }
+        
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+        
+        /* Illustration Section */
+        .login-illustration {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideIn 1.5s ease-in-out forwards;
+        }
+        
+        .login-illustration img {
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        /* Animation */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100vw);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        /* RESPONSIVE DESIGN */
+        
+        /* Tablets (max-width: 900px) */
+        @media (max-width: 900px) {
+            .login-container {
+                flex-direction: column;
+                width: 90%;
+                padding: 15px;
+            }
+        
+            .login-box {
+                text-align: center;
+            }
+        
+            .login-illustration img {
+                max-width: 300px;
+            }
+        }
+        
+        /* Mobile Devices (max-width: 600px) */
+        @media (max-width: 600px) {
+            .login-container {
+                width: 95%;
+                padding: 10px;
+            }
+        
+            .login-box {
+                width: 100%;
+                text-align: center;
+            }
+        
+            form {
+                width: 100%;
+            }
+        
+            input {
+                width: 90%;
+                margin: 0 auto;
+            }
+        
+            button {
+                width: 90%;
+                margin: 10px auto;
+            }
+        
+            .login-illustration img {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Welcome Back</h2>
+            <p>Sign in to continue</p>
+
+            
+
+            <div id="message"></div>
+
+            <form id="loginForm" action="facultylogin.php" method="post">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your Email"
+                    required
+                />
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="*******"
+                    required
+                />
+
+                <button type="submit">LOGIN</button>
+            </form>
+        </div>
+        <div class="login-illustration">
+            <img class="student" src="../new-papyrus-fy/illustrations/student.png" alt="student illustration">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const messageDiv = document.getElementById('message');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Create form data object
+                const formData = new FormData();
+                formData.append('email', email);
+                formData.append('password', password);
+
+                // Send data to server using fetch API
+                fetch('facultylogin.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        messageDiv.innerHTML = `<p class="success-message">✅ ${data.message} Redirecting...</p>`;
+                        
+                        // Redirect to homepage after 1 second
+                        setTimeout(() => {
+                            window.location.href = "FacultyHome.html";
+                        }, 1000);
+                    } else {
+                        messageDiv.innerHTML = `<p class="error-message">❌ ${data.message}</p>`;
+                    }
+                })
+                .catch(error => {
+                    messageDiv.innerHTML = `<p class="error-message">❌ An error occurred. Please try again.</p>`;
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

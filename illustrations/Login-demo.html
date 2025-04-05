@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Login</title>
+    <link rel="stylesheet" href="Login-demo-styles.css">
+</head>
+<body>
+    <script src="Login-demo-logiv.js"></script>
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="text" id="username" required>
+                <label for="username">Username</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" required>
+                <label for="password">Password</label>
+            </div>
+            <button type="submit">Sign In</button>
+            <div id="statusMessage" class="status-message"></div>
+        </form>
+        <div class="register-link">
+            Don't have an account? <a href="#">Register now</a>
+        </div>
+    </div>
+</body>
+</html>

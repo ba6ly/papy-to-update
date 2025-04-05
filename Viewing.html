@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Newsletter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+             @font-face {
+
+font-family:'Garet';
+
+src: url('../new-papyrus-fy/fonts/Web/Garet-Book.woff2') format('woff2'),
+
+url('../new-papyrus-fy/fonts/Web/Garet-Book.woff') format('woff');
+
+font-weight: 400;
+
+font-style: normal;
+
+}
+
+@font-face {
+
+font-family:'Garet';
+
+src: url('../new-papyrus-fy/fonts/Web/Garet-Heavy.woff') format('woff2'),
+
+url('../new-papyrus-fy/fonts/Web/Garet-Heavy.woff') format('woff');
+
+font-weight: 700;
+
+font-style: normal;
+
+}
+
+.bold{
+
+font-family: 'Garet', sans-serif;
+
+font-weight: 700;
+
+}
+
+.normal{
+
+font-family: 'Garet', sans-serif;
+
+font-weight: 400;
+
+}
+        
+        :root {
+            --dark-purple: #190933;
+            --peach: #ffdbc3;
+            --cream: #fff5e0;
+            --coral: #ee9e8e;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif; /* Using Poppins as Garet isn't available via CDN */
+            background-color: var(--cream);
+            color: var(--dark-purple);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: var(--dark-purple);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .newsletter-container {
+            background-color: var(--peach);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(25, 9, 51, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .newsletter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .date {
+            color: var(--dark-purple);
+            font-weight: 500;
+        }
+        
+        .newsletter-content {
+            background-color: white;
+            border-radius: 15px;
+            min-height: 500px;
+            padding: 2rem;
+            /* This is the container where the newsletter will be displayed */
+        }
+        
+        .newsletter-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            color: var(--dark-purple);
+        }
+        
+        .btn {
+            background-color: var(--coral);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e08c7c;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--dark-purple);
+            font-size: 0.9rem;
+        }
+        
+        /* Color palette display */
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .color-swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .color-swatch::after {
+            content: attr(data-color);
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.75rem;
+        }
+        
+        .dark-purple {
+            background-color: var(--dark-purple);
+        }
+        
+        .peach {
+            background-color: var(--peach);
+        }
+        
+        .cream {
+            background-color: var(--cream);
+            border: 1px solid #ddd;
+        }
+        
+        .coral {
+            background-color: var(--coral);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><p class="bold">Department Newsletter</p></h1>
+            <p class="normal">Stay updated with the latest news and events</p>
+        </header>
+        
+        <div class="newsletter-container">
+            <div class="newsletter-header">
+                <h2><p class="normal">Latest Edition</p></h2>
+                <div class="date" id="current-date">March 31, 2025</div>
+            </div>
+            
+            <!-- Newsletter content area with ID for easy content injection -->
+            <div class="newsletter-content" id="newsletter-display">
+                <!-- The newsletter content will be displayed here -->
+                <p style="text-align: center;" class="normal">Newsletter content will appear here once uploaded.</p>
+            </div>
+            
+            <div class="newsletter-footer">
+                <button class="btn" style="background-color: #190933; margin-right: 10px;" onclick="clearNewsletters()">Clear All Newsletters</button>
+                <p class="normal" style="margin-top: 15px;">To view older editions, <a href="#"> click here!</a></p>
+            </div>
+<!--         
+        <div class="color-palette">
+            <div class="color-swatch dark-purple" data-color="#190933"></div>
+            <div class="color-swatch peach" data-color="#FFDBC3"></div>
+            <div class="color-swatch cream" data-color="#FFF5E0"></div>
+            <div class="color-swatch coral" data-color="#EE9E8E"></div>
+        </div> -->
+        
+        <!-- <footer>
+            <p>&copy; 2025 Department Newsletter. All rights reserved.</p>
+        </footer> -->
+    </div>
+
+    <script>
+        // This script will update the current date and can be expanded to handle newsletter loading
+        document.addEventListener('DOMContentLoaded', function() {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = new Date().toLocaleDateString('en-US', options);
+            document.getElementById('current-date').textContent = formattedDate;
+            
+            // Function to load newsletter content - this is where you would implement your content loading
+            function loadNewsletter(newsletterId) {
+                const newsletterDisplay = document.getElementById('newsletter-display');
+                
+                // Example of how you might fetch and display a newsletter
+                // In practice, you would replace this with your actual implementation
+                if (newsletterId) {
+                    // Fetch the newsletter content using the ID
+                    // fetch('/api/newsletters/' + newsletterId)
+                    //    .then(response => response.html())
+                    //    .then(data => {
+                    //        newsletterDisplay.innerHTML = data;
+                    //    });
+                    
+                    // For demonstration, just updating the placeholder text
+                    newsletterDisplay.innerHTML = `<p style="text-align: center; margin-top: 200px;">Loading newsletter ID: ${newsletterId}...</p>`;
+                }
+            }
+            
+            // You can call this function with a newsletter ID to load specific content
+            // Example: loadNewsletter('spring-2025');
+            
+            // Get newsletter ID from URL if present
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsletterId = urlParams.get('id');
+            if (newsletterId) {
+                loadNewsletter(newsletterId);
+            }
+        });
+        // This code should be added to Viewing.html inside the script tag
+document.addEventListener('DOMContentLoaded', function() {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = new Date().toLocaleDateString('en-US', options);
+    document.getElementById('current-date').textContent = formattedDate;
+    
+    // Function to load newsletter content from localStorage
+    function loadNewsletters() {
+        const newsletterDisplay = document.getElementById('newsletter-display');
+        
+        try {
+            // Fetch files from localStorage
+            const papyrusData = localStorage.getItem('papyrusFiles');
+            
+            if (!papyrusData) {
+                newsletterDisplay.innerHTML = "<p style='text-align: center;' class='normal'>No newsletters available yet. Please upload one first.</p>";
+                return;
+            }
+            
+            const files = JSON.parse(papyrusData);
+            
+            // Filter only newsletter files
+            const newsletters = files.filter(file => file && file.category === 'newsletter');
+            
+            if (newsletters.length === 0) {
+                newsletterDisplay.innerHTML = "<p style='text-align: center;' class='normal'>No newsletters available yet. Please upload one first.</p>";
+                return;
+            }
+            
+            // Get the latest newsletter (assuming the last one added is the latest)
+            const latestNewsletter = newsletters[newsletters.length - 1];
+            
+            // Create newsletter selection dropdown
+            let newsletterOptions = '<div style="margin-bottom: 20px;"><label for="newsletter-select">Select Newsletter: </label>';
+            newsletterOptions += '<select id="newsletter-select" class="normal" style="padding: 5px; border-radius: 5px; margin-left: 10px;">';
+            
+            newsletters.forEach((newsletter, index) => {
+                const date = new Date(newsletter.uploadDate).toLocaleDateString('en-US', options);
+                newsletterOptions += `<option value="${index}" ${index === newsletters.length - 1 ? 'selected' : ''}>${date} - ${newsletter.name}</option>`;
+            });
+            
+            newsletterOptions += '</select></div>';
+            
+            // Display content based on file type
+            const displayContent = createContentDisplay(latestNewsletter);
+            
+            newsletterDisplay.innerHTML = newsletterOptions + displayContent;
+            
+            // Add event listener to the dropdown to change the displayed newsletter
+            document.getElementById('newsletter-select').addEventListener('change', function() {
+                const selectedIndex = this.value;
+                const selectedNewsletter = newsletters[selectedIndex];
+                const contentArea = document.getElementById('newsletter-content-area');
+                contentArea.innerHTML = createContentDisplay(selectedNewsletter, false);
+            });
+            
+            console.log(`Found ${newsletters.length} newsletters in local storage`);
+        } catch (error) {
+            newsletterDisplay.innerHTML = `<p style='text-align: center;' class='normal'>Error loading newsletters: ${error.message}</p>`;
+            console.error("Error loading newsletters:", error);
+        }
+    }
+    
+    // Function to create content display based on file type
+    function createContentDisplay(file, includeWrapper = true) {
+        let content = '';
+        
+        if (file.type.includes('image')) {
+            // Display image
+            content = `<img src="${file.data}" alt="${file.name}" style="max-width: 100%; max-height: 700px; display: block; margin: 0 auto;">`;
+        } else if (file.type.includes('pdf')) {
+            // Display PDF embed
+            content = `<embed src="${file.data}" type="application/pdf" width="100%" height="600px">`;
+        } else if (file.type.includes('text')) {
+            // Display text content
+            try {
+                // Attempt to extract text content from data URL
+                const base64Content = file.data.split(',')[1];
+                const decodedContent = atob(base64Content);
+                content = `<pre style="white-space: pre-wrap; font-family: inherit;">${decodedContent}</pre>`;
+            } catch (e) {
+                content = `<p>Unable to display text content. <a href="#" onclick="downloadNewsletter('${file.id}'); return false;">Download instead</a></p>`;
+            }
+        } else {
+            // For other file types, offer download
+            content = `<div style="text-align: center; padding: 50px;">
+                <p>This file type cannot be previewed directly.</p>
+                <button class="btn" onclick="downloadNewsletter('${file.id}')">Download Newsletter</button>
+            </div>`;
+        }
+        
+        if (includeWrapper) {
+            return `<div id="newsletter-content-area">${content}</div>`;
+        } else {
+            return content;
+        }
+    }
+    
+    // Add download function to window scope
+    window.downloadNewsletter = function(fileId) {
+        try {
+            const files = JSON.parse(localStorage.getItem('papyrusFiles') || '[]');
+            const file = files.find(f => f.id === fileId);
+            
+            if (!file || !file.data) {
+                alert("File content is missing. Cannot download.");
+                return;
+            }
+            
+            // Create download link
+            const link = document.createElement('a');
+            link.href = file.data;
+            link.download = file.name;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+        } catch (error) {
+            alert(`Download error: ${error.message}`);
+            console.error("Download error:", error);
+        }
+    };
+    
+    // Load newsletters when page loads
+    loadNewsletters();
+});
+
+// Add this function to the existing script in Viewing.html
+function clearNewsletters() {
+    if (confirm("Are you sure you want to clear all newsletters? This action cannot be undone.")) {
+        try {
+            // Get all files from localStorage
+            const papyrusData = localStorage.getItem('papyrusFiles');
+            
+            if (!papyrusData) {
+                alert("No data found in storage.");
+                return;
+            }
+            
+            let files = JSON.parse(papyrusData);
+            
+            // Filter out newsletter files
+            const filteredFiles = files.filter(file => file.category !== 'newsletter');
+            
+            // Save the filtered files back to localStorage
+            localStorage.setItem('papyrusFiles', JSON.stringify(filteredFiles));
+            
+            // Refresh the newsletter display
+            alert("All newsletters have been cleared successfully.");
+            document.getElementById('newsletter-display').innerHTML = "<p style='text-align: center;' class='normal'>No newsletters available yet. Please upload one first.</p>";
+            
+            console.log("Newsletters cleared from localStorage");
+        } catch (error) {
+            alert(`Error clearing newsletters: ${error.message}`);
+            console.error("Error clearing newsletters:", error);
+        }
+    }
+}
+
+// Add this to window object to make it accessible from HTML
+window.clearNewsletters = clearNewsletters;
+    </script>
+</body>
+</html>

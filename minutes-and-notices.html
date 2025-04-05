@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minutes & Notices</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFF5E0;
+            color: #190933;
+            margin: 0;
+            padding: 20px;
+        }
+        .dashboard {
+            max-width: 800px;
+            margin: auto;
+            background: #FFDBC3;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .notice-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        .notice-list li {
+            background: #EE9E8E;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+        }
+        .download-btn {
+            background: #190933;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .download-btn:hover {
+            background: #000000;
+        }
+        h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #190933;
+        }
+        .error-message {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000000;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h2>Minutes & Notices</h2>
+        <ul class="notice-list" id="noticeList">Fetching notices...</ul>
+    </div>
+
+    <script>
+        async function fetchNotices() {
+            try {
+                const response = await fetch('fetch_notices.php'); // Change this to your backend API
+                const notices = await response.json();
+                
+                const noticeList = document.getElementById("noticeList");
+                if (notices.length === 0) {
+                    noticeList.innerHTML = "<p class='error-message'>No notices available.</p>";
+                    return;
+                }
+                noticeList.innerHTML = notices.map(notice => `
+                    <li>
+                        <span>${notice.title}</span>
+                        <a href="${notice.url}" download="${notice.title}" class="download-btn">Download</a>
+                    </li>
+                `).join("");
+            } catch (error) {
+                document.getElementById("noticeList").innerHTML = "<p class='error-message'>Failed to fetch notices.</p>";
+                console.error("Error fetching notices:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchNotices);
+    </script>
+</body>
+</html>

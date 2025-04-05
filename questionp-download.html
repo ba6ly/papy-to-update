@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Paper Downloads</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFF5E0;;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            font-weight: bold;
+        }
+        .dashboard {
+            max-width: 800px;
+            margin: auto;
+            background: #FFDBC3;
+            padding: 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        .file-list li {
+            background: #EE9E8E;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+        }
+        .download-btn {
+            background: #190933;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .download-btn:hover {
+            background: #000000;
+        }
+        h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #190933;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h2> Question Papers</h2>
+        <h2>  Available Question Papers</h2>
+        <ul class="file-list" id="fileList">Fetching files...</ul>
+    </div>
+
+    <script>
+        let files = [
+            { name: "Human Resource Management.pdf", url: "files/HRM.pdf" },
+            { name: "JAVA.pdf", url: "files/Maths_Sem1.pdf" },
+            { name: "Data_Structure.pdf", url: "files/Physics_Sem1.pdf" },
+            { name: "DBMS.pdf", url: "files/Chemistry_Sem1.pdf" }
+        ];
+
+        function renderFileList() {
+            const fileList = document.getElementById("fileList");
+            if (files.length === 0) {
+                fileList.innerHTML = "No files available.";
+                return;
+            }
+            fileList.innerHTML = files.map(file => `
+                <li>
+                    <span>${file.name}</span>
+                    <a href="${file.url}" download="${file.name}" class="download-btn">Download</a>
+                </li>
+            `).join("");
+        }
+
+        document.addEventListener("DOMContentLoaded", renderFileList);
+    </script>
+</body>
+</html>

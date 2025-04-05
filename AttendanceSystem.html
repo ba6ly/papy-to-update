@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papyrus Attendance System</title>
+    <link rel="stylesheet" href="AttendanceSystemStyle.css">
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="attendance-container">
+        <div class="header">
+            <h1>Papyrus Attendance System</h1>
+            <p>Mark attendance and track student participation</p>
+        </div>
+
+        <div class="controls">
+            <div class="date-control">
+                <label class="Date-design">Date:</label>
+                <input type="date" id="currentDate">
+            </div>
+            
+            <div class="search-control">
+                <label>Search Students:</label>
+                <input type="text" id="searchInput" placeholder="Search by name or roll no...">
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-add-student" id="addStudentBtn">Add Student</button>
+                <button class="btn btn-export" id="exportBtn">Export to Excel</button>
+                <!-- <button class="btn btn-clear-status" id="clearStatusBtn">Clear Status</button> -->
+                <button class="btn btn-clear-all" id="clearAllBtn">Clear All</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll No</th>
+                        <th>Attendance</th>
+                        <th>Today's Status</th>
+                        <th>Attendance %</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                    <!-- Students will be added here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="summary-section">
+            <h2>Attendance Summary</h2>
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-value" id="presentCount">0</div>
+                    <div class="summary-label">Present Today</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" id="absentCount">0</div>
+                    <div class="summary-label">Absent Today</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" id="lateCount">0</div>
+                    <div class="summary-label">Late Today</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" id="totalStudents">0</div>
+                    <div class="summary-label">Total Students</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <a href="view-attendance.html" class="view-attendance-btn">View Attendance Dashboard</a> -->
+
+        <!-- Add Student Modal -->
+        <div class="modal-overlay" id="studentModal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add New Student</h2>
+                    <button class="modal-close" id="closeModalBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="studentName">Student Name:</label>
+                        <input type="text" id="studentName" placeholder="Enter full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="studentRollNo">Roll Number:</label>
+                        <input type="text" id="studentRollNo" placeholder="e.g. AEI/22/CO/001">
+                        <p class="error-message" id="errorMessage" style="display: none;"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                    <button class="btn btn-add" id="confirmAddBtn">Add Student</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="AttendanceSystemLogic.js"></script>
+</body>
+</html>
