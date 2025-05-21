@@ -5,11 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Garet&display=swap');
+       @font-face {
+
+font-family:'Garet';
+src: url('./fonts/Web/Garet-Book.woff2') format('woff2'),
+url('./fonts/Web/Garet-Book.woff') format('woff');
+font-weight: 400;
+font-style: normal;
+}
+
+@font-face {
+
+font-family:'Garet';
+src: url('./fonts/Web/Garet-Heavy.woff') format('woff2')
+url('./fonts/Web/Garet-Heavy.woff') format('woff');
+font-weight: 700;
+font-style: normal;
+}
+
+.bold{
+
+font-family: 'Garet', sans-serif;
+font-weight: 700;
+}
+
+.normal{
+font-family: 'Garet', sans-serif;
+font-weight: 400;
+}
 
         /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Garet', sans-serif;
             background: linear-gradient(to right, #e2c4b6, #8a839a);
             margin: 0;
             padding: 0;
@@ -197,7 +224,7 @@
             </form>
         </div>
         <div class="login-illustration">
-            <img class="student" src="../new-papyrus-fy/illustrations/student.png" alt="student illustration">
+            <img class="student" src="./illustrations/student.png" alt="student illustration">
         </div>
     </div>
 

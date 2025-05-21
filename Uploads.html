@@ -8,15 +8,15 @@
     
   @font-face {
     font-family:'Garet';
-    src: url('../components/fonts/Web/Garet-Book.woff2')format('woff2'),
-    url('../components/fonts/Web/Garet-Book.woff')format('woff');
+    src: url('./fonts/Web/Garet-Book.woff2')format('woff2'),
+    url('./fonts/Web/Garet-Book.woff')format('woff');
     font-weight: 400;
     font-style: normal;
   }
   @font-face {
     font-family:'Garet';
-    src: url('../components/fonts/Web/Garet-Heavy.woff')format('woff2'),
-    url('../components/fonts/Web/Garet-Heavy.woff')format('woff');
+    src: url('./fonts/Web/Garet-Heavy.woff')format('woff2'),
+    url('./fonts/Web/Garet-Heavy.woff')format('woff');
     font-weight: 700;
     font-style: normal;
   }
@@ -35,6 +35,7 @@
   align-items: center;
   height: 100vh;
   background: #fff5e0;
+  font-family: 'Garet',sans-serif;
 }
 .container {
   background: #fFF;
@@ -309,25 +310,25 @@ h1 {
         <div class="upload-options" id="options-container">
             <div class="option" data-type="question-papers" onclick="showUpload('question-papers')">
                 <div class="option-icon">
-                  <img src="../new-papyrus-fy/illustrations/questions.svg" alt="question-papers" width="200" height="300"></imgsrc>
+                  <img src="./illustrations/questions.svg" alt="question-papers" width="200" height="300"></imgsrc>
                 </div>
                 <div class="option-label"><p class="normal">Question Papers</p></div>
             </div>
             <div class="option" data-type="photo-gallery" onclick="showUpload('photo-gallery')">
                 <div class="option-icon">
-                  <img src="../new-papyrus-fy/illustrations/Imageuploadbro.svg" alt="photo-gallery" width="200" height="300"></imgsrc>
+                  <img src="./illustrations/Imageuploadbro.svg" alt="photo-gallery" width="200" height="300"></imgsrc>
                 </div>
                 <div class="option-label"><p class="normal">Photo Gallery</p></div>
             </div>
             <div class="option" data-type="newsletter" onclick="showUpload('newsletter')">
                 <div class="option-icon">
-                  <img src="../new-papyrus-fy/illustrations/newsletter.png" alt="newsletter" width="200" height="100"></imgsrc>
+                  <img src="./illustrations/newsletter.png" alt="newsletter" width="200" height="100"></imgsrc>
                 </div>
                 <div class="option-label"><p class="normal">Newsletter</p></div>
             </div>
             <div class="option" data-type="notes" onclick="showUpload('notices&minutes')">
               <div class="option-icon">
-                <img src="../new-papyrus-fy/illustrations/notes.svg" alt="notices" width="200" height="100"></imgsrc>
+                <img src="./illustrations/notes.svg" alt="notices" width="200" height="100"></imgsrc>
               </div>
               <div class="option-label"><p class="normal">Notices&Minutes</p></div>
           </div>
@@ -337,7 +338,7 @@ h1 {
       <div class="upload-box">
           <h3 id="upload-title"><p bold>Upload</p></h3>
           <div class="drop-area" id="drop-area">
-              <img src="../new-papyrus-fy/illustrations/notes.svg" alt="Upload">
+              <img src="./illustrations/notes.svg" alt="Upload">
               <p>Drop your files here or <span class="browse">browse</span></p>
               <input type="file" id="file-input" multiple hidden>
               
